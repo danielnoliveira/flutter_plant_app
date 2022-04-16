@@ -5,6 +5,8 @@ import 'purchase_view_model.dart';
 class PurchaseView extends PurchaseViewModel {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: Container(),
+    );
   }
 }
