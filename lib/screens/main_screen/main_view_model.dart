@@ -5,7 +5,6 @@ import 'main.dart';
 abstract class MainViewModel extends State<Main> {
   String tagSelected = 'Concept';
 
-  GlobalKey conceptButtonKey = GlobalKey();
   GlobalKey popularButtonKey = GlobalKey();
   GlobalKey newButtonKey = GlobalKey();
 
@@ -15,9 +14,7 @@ abstract class MainViewModel extends State<Main> {
     setState(() {
       tagSelected = newValue;
       if (newValue == 'Concept') {
-        RenderBox rb =
-            conceptButtonKey.currentContext.findRenderObject() as RenderBox;
-        yPositionGreenBar = rb.localToGlobal(Offset.zero).dx;
+        yPositionGreenBar = 26.0;
       } else if (newValue == 'Popular') {
         RenderBox rb =
             popularButtonKey.currentContext.findRenderObject() as RenderBox;
