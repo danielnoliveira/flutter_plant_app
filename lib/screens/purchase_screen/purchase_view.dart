@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:plant_shop/models/plant.dart';
 import 'package:plant_shop/screens/purchase_screen/widgets/plant_price.dart';
@@ -60,11 +61,15 @@ class PurchaseView extends PurchaseViewModel {
                       backgroundColor: MaterialStateProperty.all(Colors.white),
                     ),
                     onPressed: () {
-                      print('favoritado');
+                      setState(() {
+                        plantFavorited = !plantFavorited;
+                      });
                     },
-                    child: const Icon(
+                    child: Icon(
                       Icons.favorite,
-                      color: const Color.fromRGBO(32, 178, 93, 1),
+                      color: plantFavorited
+                          ? Colors.red
+                          : const Color.fromRGBO(32, 178, 93, 1),
                     ),
                   ),
                 ],
@@ -73,7 +78,13 @@ class PurchaseView extends PurchaseViewModel {
             Expanded(
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 35),
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.black.withOpacity(0.20),
+                        blurRadius: 15,
+                        offset: Offset(0, -2))
+                  ],
                   color: Colors.white,
                   borderRadius: const BorderRadius.only(
                     topRight: Radius.circular(40),
@@ -134,7 +145,66 @@ class PurchaseView extends PurchaseViewModel {
                             ],
                           )
                         ],
-                      )
+                      ),
+                      const SizedBox(
+                        height: 25,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'description'.toUpperCase(),
+                            style: GoogleFonts.lato(
+                              fontWeight: FontWeight.w800,
+                              fontSize: 14,
+                              height: 2,
+                              letterSpacing: 1,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          Text(plantSelected.description,
+                              style: GoogleFonts.lato(
+                                fontSize: 16,
+                                color: Color.fromRGBO(169, 169, 169, 1),
+                                height: 1.2,
+                                fontWeight: FontWeight.w500,
+                              ))
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 25,
+                      ),
+                      ElevatedButton(
+                        onPressed: () {},
+                        style: ButtonStyle(
+                            padding: MaterialStateProperty.all(
+                                EdgeInsets.symmetric(vertical: 15)),
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.black),
+                            alignment: Alignment.center),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset('assets/icons/basket_icon.svg',
+                                color: Colors.white),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text('add to cart'.toUpperCase(),
+                                style: GoogleFonts.lato(
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                  height: 1,
+                                  fontWeight: FontWeight.w800,
+                                )),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 46,
+                      ),
                     ],
                   ),
                 ),

@@ -7,9 +7,12 @@ abstract class PurchaseViewModel extends State<Purchase> {
 
   int vasePlantSelected = 1;
 
+  bool plantFavorited = false;
+
   @override
   void initState() {
     quantityPlants = 1;
+    plantFavorited = false;
     super.initState();
   }
 
